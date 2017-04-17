@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "534530719667",
+    "project_id": "mysleep-a4ac8"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534530719667:android:5aac3ba5e7000f2c",
+        "android_client_info": {
+          "package_name": "br.edu.ufcspa.snorlax_angelo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534530719667-ecfe9gtk58u5v0m1j222idbh0qd53vk0.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "534530719667-179q2kvgalvgr6jak3u46catj4dsm1mt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ufcspa.snorlax_angelo",
+            "certificate_hash": "5e234cac17aaa492b72bc408fa7bb9f9c88992f2"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHNf5wIZtniLvZbc76rDSJF2kmBqqjABc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

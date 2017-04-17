@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">MySleep</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="action_gravacoes">Gravações</string>
+
+    <string name="avancar">AVANÇAR</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_stop">Stop</string>
+    <string name="recording">Recording</string>
+    <string name="start_capture">start recording</string>
+    <string name="capacidade">Capacidade Máx.:</string>
+    <string name="title_activity_primeiro_passo">Primeiro Passo</string>
+
+    <string name="quest_title">Questionário</string>
+    <string name="quest_sexo">Sexo:</string>
+    <string name="quest_idade">Idade:</string>
+    <string name="quest_altura">Altura:</string>
+    <string name="quest_peso">Peso:</string>
+    <string name="quest_perg_cans">Você se sente cansado, fatigado or sonolento durante o dia?</string>
+    <string name="quest_perg_acor">Você costuma acordar muitas vezes durante a noite?</string>
+    <string name="quest_perg_falta_ar">Você costuma acordar com falta de ar?</string>
+    <string name="quest_perg_medicacao">Você toma alguma medicação?</string>
+    <string name="quest_perg_pressao">Você tem pressão alta?</string>
+    <string name="title_activity_tela_questionario">TelaQuestionario</string>
+    <string name="title_activity_aplication">MySleep</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="about_app">About us</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="welcome">Welcome to MySleep app</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- _________________facebook id __________________-->
+    <string name="facebook_app_id">104582226701979</string>
+    <string name="title_activity_teste_login">TesteLogin</string>
+    <string name="title_fragment_recording_list">Recording list</string>
+    <string name="title_fragment_record">New recording</string>
+    <string name="title_fragment_settings">Settings</string>
+    <string name="title_fragment_about">About</string>
+    <string name="action_about">About</string>
+    <string name="app_intro">Guia de utilização</string>
+
+</resources>

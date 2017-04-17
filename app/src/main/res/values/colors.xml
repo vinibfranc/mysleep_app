@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2374AB</color>
+    <color name="record">#2374AB</color>
+    <color name="colorPrimaryDark">#148E85</color>
+    <color name="colorAccent">#161B24</color>
+    <color name="colorBackground">#161B24</color>
+    <color name="colorMenuHeader">#2A2F38</color>
+    <color name="lineSeparator">#2A2F38</color>
+    <color name="pallete_black">#161B24</color>
+    <color name="pallete_main_blue">#2374AB</color>
+    <color name="pallete_white">#FFFFFF</color>
+    <color name="pallete_green">#235D56</color>
+    <color name="pallete_red">#D16D6D</color>
+    <color name="pallete_gray">#54627F</color>
+
+
+    <color name="pallete_blue_weak">#ffffff</color>
+
+
+
+    <color name="fb_color">#44619C</color>
+    <color name="g_color">#DD4C39</color>
+
+
+
+
+</resources>
