@@ -31,7 +31,14 @@
         <activity
             android:name="br.edu.ufcspa.snorlax_angelo.SplashActivity"
             android:theme="@style/SplashTheme">
-            <!--INTENT FILTER  MAIN LAUNCHER HERE -->
+
+            <!-- INTENT FILTER  MAIN LAUNCHER HERE -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -62,19 +69,15 @@
         <activity
             android:name="br.edu.ufcspa.snorlax_angelo.TesteLogin"
             android:label="@string/title_activity_teste_login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="br.edu.ufcspa.snorlax_angelo.InfoActivity"
-            android:label="@string/app_intro">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="@string/app_intro"></activity>
+        <activity android:name="br.edu.ufcspa.snorlax_angelo.QuestionActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
-
     </application>
 
 </manifest>

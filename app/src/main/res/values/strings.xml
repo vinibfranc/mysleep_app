@@ -37,6 +37,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <!-- _________________google id __________________-->
+    <string name="google_server_client_id">534530719667-j42ta1nu8tr680l5p76pdp96q6c4j5kd.apps.googleusercontent.com</string>
+
     <!-- _________________facebook id __________________-->
     <string name="facebook_app_id">104582226701979</string>
     <string name="title_activity_teste_login">TesteLogin</string>

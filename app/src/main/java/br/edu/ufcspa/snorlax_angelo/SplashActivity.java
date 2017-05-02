@@ -1,6 +1,7 @@
 package br.edu.ufcspa.snorlax_angelo;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,11 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
 
+import br.edu.ufcspa.snorlax_angelo.client.QuestionClient;
 import br.edu.ufcspa.snorlax_angelo.client.RecordingClient;
 import br.edu.ufcspa.snorlax_angelo.managers.SharedPreferenceManager;
+import br.edu.ufcspa.snorlax_angelo.model.Question;
 import br.edu.ufcspa.snorlax_angelo.model.SendRecording;
 import br.edu.ufcspa.snorlax_angelo.model.UserModel;
 
@@ -46,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
 
         }
-        UserModel userModel = SharedPreferenceManager.getSharedInstance().getUserModelFromPreferences();
+      /*  UserModel userModel = SharedPreferenceManager.getSharedInstance().getUserModelFromPreferences();
         if(userModel!=null) {
             Intent intent = new Intent(this, HomeActivity.class);
             intent.putExtra(UserModel.class.getSimpleName(), userModel);
@@ -59,10 +67,40 @@ public class SplashActivity extends AppCompatActivity {
             //Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
+        }*/
+
+        QuestionClient q = new QuestionClient(getBaseContext());
+        try {
+            JSONObject jsonBody = new JSONObject().put("id_user", 14);
+            Log.d("json splash", jsonBody.toString());
+            q.postJson(jsonBody);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
+
+
+
 
         /*Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();*/
     }
+
+
+    public static void mountQuestion(Question q,Context c){
+        Log.d("json splash:", q.toString());
+        if(q!=null){
+            Intent intent = new Intent(c,QuestionActivity.class);
+            intent.putExtra("question", (Serializable) q);
+            c.startActivity(intent);
+        }
+
+    }
+
+
+
+
+
+
 }
