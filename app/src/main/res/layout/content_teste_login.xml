@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.edu.ufcspa.snorlax_angelo.TesteLogin"
+    tools:context="br.edu.ufcspa.snorlax_angelo.LoginActivityApp"
     tools:showIn="@layout/app_bar_teste_login">
 
     <FrameLayout

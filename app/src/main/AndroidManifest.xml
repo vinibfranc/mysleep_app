@@ -67,7 +67,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="br.edu.ufcspa.snorlax_angelo.TesteLogin"
+            android:name="br.edu.ufcspa.snorlax_angelo.LoginActivityApp"
             android:label="@string/title_activity_teste_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

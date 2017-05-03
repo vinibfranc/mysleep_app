@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 
 import ufcspa.edu.br.snorlax_angelo.R;
 
-public class TesteLogin extends AppCompatActivity
+public class LoginActivityApp extends AppCompatActivity
         {
     FrameLayout content;
 

@@ -31,23 +31,24 @@ public class QuestionClient extends HttpClient {
     }
 
 
-    public void postJson(JSONObject jsonBody){
+    public void postJson(final JSONObject jsonBody){
         question=null;
 
        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL + "get_questions.php", jsonBody, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if(response.getString("result").equals(0) || response.getString("result").equals(-1)){
-                        Log.e("json", "JSON Post erro");
-                    }else {
-                        Log.e("json", "response json: recebendo json:"+response.toString());
-
+                    Log.e("json question", "response json: recebendo json:"+response.toString());
+                    if(response.getInt("result")==1){
+                        Log.e("json", "response json: ok");
                         //recover question
                         int idQuestion=Integer.parseInt(response.getString("id_question"));
                         String description=response.getString("description");
                         String[] options=decodeString(response.getString("options"));
-                        question=new Question(idQuestion,0,description,options);
+                        question=new Question(idQuestion,jsonBody.getInt("id_user"),description,options);
+                        act.mountQuestion(question,context);
+                    }else {
+                        Log.e("json", "JSON Post erro");
                         act.mountQuestion(question,context);
                     }
                 } catch (JSONException e) {
