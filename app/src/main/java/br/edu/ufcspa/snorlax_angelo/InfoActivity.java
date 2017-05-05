@@ -1,5 +1,6 @@
 package br.edu.ufcspa.snorlax_angelo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -24,25 +25,25 @@ public class InfoActivity extends AppIntro {
 
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
-        addSlide(AppIntroFragment.newInstance("Posicionamento smartphone", "Posicione o smartphone proximo da cama", R.drawable.audio_icon, getResources().getColor(R.color.pallete_black)));
-        addSlide(AppIntroFragment.newInstance("Conexão com Internet!", "Mantenha WI-FI ligado", R.drawable.audio_icon, getResources().getColor(R.color.pallete_black)));
-        addSlide(AppIntroFragment.newInstance("Memoria", "Feche apps que não esteja utilizando", R.drawable.audio_icon, getResources().getColor(R.color.pallete_black)));
+        addSlide(AppIntroFragment.newInstance("", "Please, ensure the ambient silence", R.drawable.dica_01, getResources().getColor(R.color.pallete_black)));
+        addSlide(AppIntroFragment.newInstance("", "Plug the smartphone on the battery charger", R.drawable.dica_02, getResources().getColor(R.color.pallete_black)));
+        addSlide(AppIntroFragment.newInstance("", "Let the smartphone beside the bed", R.drawable.dica_03, getResources().getColor(R.color.pallete_black)));
 
         //addSlide(AppIntroFragment.newInstance(title, description, image, backgroundColor));
 
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setBarColor(Color.parseColor("#3F51B5"));
-        setSeparatorColor(Color.parseColor("#2196F3"));
+        setBarColor(getResources().getColor(R.color.pallete_black));
+        setSeparatorColor(getResources().getColor(R.color.pallete_blue_weak));
 
         // Hide Skip/Done button.
         showSkipButton(false);
-        setProgressButtonEnabled(false);
+        setProgressButtonEnabled(true);
 
         // Turn vibration on and set intensity.
         // NOTE: you will probably need to ask VIBRATE permission in Manifest.
-        setVibrate(true);
-        setVibrateIntensity(30);
+        /*setVibrate(true);
+        setVibrateIntensity(30);*/
     }
 
     @Override
@@ -55,6 +56,9 @@ public class InfoActivity extends AppIntro {
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         // Do something when users tap on Done button.
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
