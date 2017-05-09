@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
+import br.edu.ufcspa.snorlax_angelo.managers.SharedPreferenceManager;
 import ufcspa.edu.br.snorlax_angelo.R;
 
 /**
@@ -56,8 +57,13 @@ public class InfoActivity extends AppIntro {
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         // Do something when users tap on Done button.
-        Intent intent = new Intent(this,HomeActivity.class);
-        startActivity(intent);
+       /* Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);*/
+        SharedPreferenceManager.getSharedInstance().saveSeeInstructions(true);
+
+
+        // Magic goes here
+        this.setResult(42);
         finish();
     }
 

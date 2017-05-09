@@ -213,4 +213,13 @@ public class SharedPreferenceManager {
         return userModel;
     }
 
+    public void saveSeeInstructions(boolean seeInstructions){
+        sharedPreferences.edit().putBoolean("instructions",seeInstructions).apply();
+    }
+
+    public boolean seeInstructions(){
+       return sharedPreferences.getBoolean("instructions", false);
+    }
+
+
 }

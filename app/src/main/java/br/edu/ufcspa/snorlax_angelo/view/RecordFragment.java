@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -41,7 +42,10 @@ import java.util.Date;
 import java.util.List;
 
 import br.edu.ufcspa.snorlax_angelo.AppLog;
+import br.edu.ufcspa.snorlax_angelo.InfoActivity;
+import br.edu.ufcspa.snorlax_angelo.Utilities;
 import br.edu.ufcspa.snorlax_angelo.database.DataBaseAdapter;
+import br.edu.ufcspa.snorlax_angelo.managers.SharedPreferenceManager;
 import br.edu.ufcspa.snorlax_angelo.model.RecordedFiles;
 import br.edu.ufcspa.snorlax_angelo.model.Recording;
 import br.edu.ufcspa.snorlax_angelo.view.UploadFileAsync;
@@ -54,6 +58,7 @@ public class RecordFragment extends Fragment {
 
 
     private long record_size = 60000*10; //10 minute
+    private long MIN_AVAILABLE_SPACE = 100;
     private static final int RECORDER_BPP = 16;
     private static final String AUDIO_RECORDER_FILE_EXT_WAV = ".wav";
     private static final String AUDIO_RECORDER_FOLDER = "Snore_angELO";
@@ -76,6 +81,7 @@ public class RecordFragment extends Fragment {
     private boolean isProcessing = false;
     String fileToprocess = "";
     String logApp="app";
+    private static final int RESULT_INSTRUCTIONS = 42;
 
 
     private int tempNumber=0;
@@ -197,43 +203,69 @@ public class RecordFragment extends Fragment {
         public void onClick(View v) {
 
                if(!isRecording) {
-                   if(isOnline()){
-                       if(getActivity()!=null) {
-                           getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                   if(!isOnline()){
+                       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                           Toast.makeText(getContext(),"Please, conect your smartphone to Wi-Fi",Toast.LENGTH_LONG).show();
+                   }
+                   else if(Utilities.getAvailableSpaceInMB() < MIN_AVAILABLE_SPACE){
+                       Toast.makeText(getContext(),"Insufficient storage space. It is necessary at least 100MB",Toast.LENGTH_LONG).show();
+                   }
+                   else {
+                       if (SharedPreferenceManager.getSharedInstance().seeInstructions())
+                           mountRecording();
+                       else {
+                           Intent intent = new Intent(getContext(), InfoActivity.class);
+                           startActivityForResult(intent, RESULT_INSTRUCTIONS);
+                           //mountRecording();
                        }
-                       bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,RECORDER_CHANNELS,RECORDER_AUDIO_ENCODING);
-                       AppLog.logString("Start Recording");
-                       recording_message.setVisibility(View.VISIBLE);
-                       startRecording();
-                       cronometro.setBase(SystemClock.elapsedRealtime());
-                       cronometro.start();
-                       btn_gravacao.setText(getString(R.string.btn_stop));
-                       txt_status.setText(getString(R.string.recording));
-
-                   }else {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            Toast.makeText(getContext(),"Please, conect your smartphone to Wi-Fi",Toast.LENGTH_LONG).show();
-                        }
                    }
                }
                else{
-                   AppLog.logString("Stop Recording");
-                   recording_message.setVisibility(View.INVISIBLE);
-                   stopRecording();
-                   cronometro.stop();
-
-                   alerta.show();
-
-                   cronometro.setBase(SystemClock.elapsedRealtime());
-
-                   btn_gravacao.setText(getString(R.string.btn_start));
-                   txt_status.setText(getString(R.string.start_capture));
-                   getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+                   dismountRecording();
                }
 
 
         }
     };
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("result","on Activity resylt record fragment");
+        Log.d("result","request code:" +requestCode);
+        Log.d("result","result code:" +resultCode);
+        if (resultCode==RESULT_INSTRUCTIONS)
+            mountRecording();
+    }
+
+    private void mountRecording(){
+        if(getActivity()!=null) {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,RECORDER_CHANNELS,RECORDER_AUDIO_ENCODING);
+        AppLog.logString("Start Recording");
+        recording_message.setVisibility(View.VISIBLE);
+        startRecording();
+        cronometro.setBase(SystemClock.elapsedRealtime());
+        cronometro.start();
+        btn_gravacao.setText(getString(R.string.btn_stop));
+        txt_status.setText(getString(R.string.recording));
+    }
+
+
+    private void dismountRecording(){
+        AppLog.logString("Stop Recording");
+        recording_message.setVisibility(View.INVISIBLE);
+        stopRecording();
+        cronometro.stop();
+        alerta.show();
+        cronometro.setBase(SystemClock.elapsedRealtime());
+        btn_gravacao.setText(getString(R.string.btn_start));
+        txt_status.setText(getString(R.string.start_capture));
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+    }
+
 
 
     public boolean isOnline() {
@@ -272,6 +304,17 @@ public class RecordFragment extends Fragment {
         return strDate;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     private void startRecording(){
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,

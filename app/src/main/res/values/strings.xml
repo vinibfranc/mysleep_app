@@ -42,6 +42,18 @@
 
     <!-- _________________facebook id __________________-->
     <string name="facebook_app_id">104582226701979</string>
+
+
+
+    <!-- _________________tutorial fragments __________________-->
+    <string name="fagment_slide_silence_description">Please, ensure the ambient silence</string>
+    <string name="fagment_slide_battery_description">Plug the smartphone on the battery charger</string>
+    <string name="fagment_slide_bed_description">Let the smartphone beside the bed</string>
+
+
+
+
+
     <string name="title_activity_teste_login">TesteLogin</string>
     <string name="title_fragment_recording_list">Recording list</string>
     <string name="title_fragment_record">New recording</string>

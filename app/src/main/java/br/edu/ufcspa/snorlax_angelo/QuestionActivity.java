@@ -43,7 +43,6 @@ public class QuestionActivity extends AppCompatActivity {
             lvOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(getBaseContext(), question.getOptions()[i], Toast.LENGTH_SHORT).show();
                     Answer answer = new Answer(question.getIdUser(), question.getIdQuestion(), question.getOptions()[i]);
                     sendAnswer(answer);
                 }

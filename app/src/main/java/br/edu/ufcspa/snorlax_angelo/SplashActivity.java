@@ -38,6 +38,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getHash();
+        Log.d("space","available:"+Utilities.getAvailableSpaceInMB()+"MB");
         userModel = SharedPreferenceManager.getSharedInstance().getUserModelFromPreferences();
 
         if(userModel!=null) {
