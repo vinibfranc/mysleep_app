@@ -8,11 +8,11 @@
     tools:context="br.edu.ufcspa.snorlax_angelo.HomeActivity">
 
     <ImageView
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="80dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imgrec"
-        android:background="@drawable/mic2"
+        android:background="@drawable/ic_recording_night_large"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
         android:layout_toLeftOf="@+id/txt_status"
@@ -26,8 +26,8 @@
         android:textAlignment="center"
         android:gravity="center|clip_vertical"
         android:fontFamily="sans-serif-thin"
-        android:textColor="@color/record"
-        android:layout_weight="0.10"
+        android:textColor="@color/pallete_white"
+        android:layout_weight="0.1"
         android:layout_marginTop="20dp"
         />
 
@@ -72,7 +72,7 @@
         android:gravity="center|clip_vertical"
         android:textColor="@color/pallete_white"
         android:fontFamily="sans-serif-thin"
-        android:background="@color/record"
+        android:background="@color/pallete_night"
         android:textSize="@dimen/abc_action_bar_progress_bar_size"
         />
 

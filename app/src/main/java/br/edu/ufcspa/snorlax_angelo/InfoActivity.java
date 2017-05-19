@@ -1,9 +1,6 @@
 package br.edu.ufcspa.snorlax_angelo;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -26,9 +23,9 @@ public class InfoActivity extends AppIntro {
 
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
-        addSlide(AppIntroFragment.newInstance("", "Please, ensure the ambient silence", R.drawable.dica_01, getResources().getColor(R.color.pallete_black)));
-        addSlide(AppIntroFragment.newInstance("", "Plug the smartphone on the battery charger", R.drawable.dica_02, getResources().getColor(R.color.pallete_black)));
-        addSlide(AppIntroFragment.newInstance("", "Let the smartphone beside the bed", R.drawable.dica_03, getResources().getColor(R.color.pallete_black)));
+        addSlide(AppIntroFragment.newInstance("", getResources().getString(R.string.tutorial_description_1), R.drawable.bck_tutorial_1_large, getResources().getColor(R.color.pallete_black)));
+        addSlide(AppIntroFragment.newInstance("",  getResources().getString(R.string.tutorial_description_2), R.drawable.bck_tutorial_2_large, getResources().getColor(R.color.pallete_black)));
+        addSlide(AppIntroFragment.newInstance("",  getResources().getString(R.string.tutorial_description_3), R.drawable.bck_tutorial_3_large, getResources().getColor(R.color.pallete_black)));
 
         //addSlide(AppIntroFragment.newInstance(title, description, image, backgroundColor));
 

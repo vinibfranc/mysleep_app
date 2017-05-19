@@ -163,7 +163,7 @@ public class HomeActivity extends AppCompatActivity
         Log.d("app", " user name:" + userModel.userName);
         simpleDraweeView = ButterKnife.findById(headerView, R.id.user_imageview);
         //simpleDraweeView.setImageURI(Uri.parse(userModel.profilePic));
-        simpleDraweeView.setBackgroundResource(R.drawable.icone_app2);
+        //simpleDraweeView.setBackgroundResource(R.drawable.icone_app2);
 
         //nameTextView = ButterKnife.findById(headerView, R.id.txtViewNameUser);
         //nameTextView.setText(userModel.userName);
@@ -234,11 +234,14 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             fragmentManager.beginTransaction().replace(R.id.frame_content, new SettingsFragment()).commit();
             toolbar.setTitle(R.string.title_fragment_settings);
-        } /*else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(getApplicationContext(),InfoActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_about) {
+            fragmentManager.beginTransaction().replace(R.id.frame_content, new SettingsFragment()).commit();
+            toolbar.setTitle(R.string.title_fragment_about);
 
-        } else if (id == R.id.nav_send) {
-
-        }*/
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

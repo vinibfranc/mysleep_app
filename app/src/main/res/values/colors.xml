@@ -8,6 +8,9 @@
     <color name="colorMenuHeader">#2A2F38</color>
     <color name="lineSeparator">#2A2F38</color>
     <color name="pallete_black">#161B24</color>
+    <color name="pallete_night">#365A67</color>
+    <color name="pallete_night2">#2B4854</color>
+    <color name="pallete_clound">#6EA3BA</color>
     <color name="pallete_main_blue">#2374AB</color>
     <color name="pallete_white">#FFFFFF</color>
     <color name="pallete_green">#235D56</color>

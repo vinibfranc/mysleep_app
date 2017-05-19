@@ -22,7 +22,7 @@
         app:headerLayout="@layout/nav_header_aplication"
         app:menu="@menu/activity_aplication_drawer"
 
-        android:background="@color/colorBackground"
+        android:background="@color/pallete_night2"
         app:itemIconTint="@color/pallete_white"
         app:itemTextColor="@color/pallete_white"/>
         />
