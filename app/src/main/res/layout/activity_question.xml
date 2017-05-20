@@ -9,34 +9,56 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:background="@color/colorBackground"
+    android:background="@color/pallete_black"
     tools:context="br.edu.ufcspa.snorlax_angelo.QuestionActivity">
 
-
-    <TextView
-        android:text="Where do you live?"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pallete_gray"
-        android:textColor="@color/pallete_blue_weak"
-        android:id="@+id/txtViewQuestion"
-        android:layout_margin="20dp"
-        android:padding="20dp"
-        android:textSize="8pt"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
-        />
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="20dp"
+        android:background="@color/pallete_black"
+        >
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_question"
+            />
+
+        <TextView
+            android:text="Where do you live?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pallete_black"
+            android:textColor="@color/pallete_white"
+            android:id="@+id/txtViewQuestion"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+
+
+
     <ListView
         android:id="@+id/listViewOptions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:padding="20dp"
         android:textSize="8pt"
         android:textAlignment="center"
         android:layout_gravity="center_horizontal"
-        android:background="@color/pallete_gray"
         android:textColor="@color/pallete_blue_weak"
+        android:divider="@color/pallete_black"
+        android:dividerHeight="3dp"
         />
 
 

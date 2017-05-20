@@ -31,7 +31,7 @@ public class InfoActivity extends AppIntro {
 
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setBarColor(getResources().getColor(R.color.pallete_black));
+        setBarColor(getResources().getColor(R.color.pallete_night));
         setSeparatorColor(getResources().getColor(R.color.pallete_blue_weak));
 
         // Hide Skip/Done button.

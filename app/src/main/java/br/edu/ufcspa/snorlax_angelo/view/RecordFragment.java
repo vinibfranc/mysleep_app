@@ -165,7 +165,7 @@ public class RecordFragment extends Fragment {
         builder.setTitle("MySleep");
         builder.setMessage("Recording finished!");
         builder.setCancelable(false);
-        builder.setIcon(R.drawable.icone_app1);
+        builder.setIcon(R.drawable.ic_recording_night);
         //define um botão como positivo
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
@@ -251,6 +251,7 @@ public class RecordFragment extends Fragment {
         cronometro.start();
         btn_gravacao.setText(getString(R.string.btn_stop));
         txt_status.setText(getString(R.string.recording));
+        Toast.makeText(getActivity().getApplicationContext(),"Good night!",Toast.LENGTH_SHORT).show();
     }
 
 

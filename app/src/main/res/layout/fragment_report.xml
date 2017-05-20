@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="br.edu.ufcspa.snorlax_angelo.ReportFragment"
-    android:background="@color/colorBackground"
+    android:background="@color/pallete_black"
     >
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:id="@+id/listview_recordings"
         android:divider="@color/lineSeparator"
-        android:dividerHeight="1.5px"
+        android:layout_gravity="center"
+        android:dividerHeight="2dp"
         >
     </ListView>
 

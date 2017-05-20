@@ -122,9 +122,9 @@ public class RecordingAdapter extends BaseAdapter {
 
     public String getStatus(String status){
         if (status.equals("S")){
-            return "Upload Complete";
+            return "UPLOAD COMPLETE";
         }else{
-            return "Uploading";
+            return "UPLOADING...";
         }
     }
 

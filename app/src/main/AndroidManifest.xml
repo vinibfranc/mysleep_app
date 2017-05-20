@@ -33,6 +33,8 @@
             android:theme="@style/SplashTheme">
 
             <!-- INTENT FILTER  MAIN LAUNCHER HERE -->
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -78,6 +80,7 @@
 
         </activity>
         <activity android:name="br.edu.ufcspa.snorlax_angelo.QuestionActivity">
+
 
 
 
