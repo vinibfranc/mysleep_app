@@ -69,6 +69,31 @@
     <string name="tutorial_description_2">Connect your smartphone to the battery charger</string>
     <string name="tutorial_description_3">Let the smartphone next to the bed</string>
 
+    <string name="tcle_title">Termo de Consentimento Informado Livre e Esclarecido</string>
+    <string name="tcle_title_pesquisa">Título da Pesquisa: “Estudo de características acústicas do ronco e sua correlação com a Apneia Obstrutiva do Sono por meio da detecção automática de eventos respiratórios”</string>
+    <string name="tcle_description_pesquisa">Você está sendo convidado a participar de uma pesquisa científica, na qual visa estudar os eventos relacionados ao sono através da gravação e análise do áudio durante a noite de sono. Existe evidência científica de que a análise sonora do ronco pode revelar informações distintivas sobre a presença ou ausência da Síndrome da Apnéia e Hipopnéia Obstrutiva do Sono (SAHOS) com apenas um canal de coleta, mais especificamente, o sinal de áudio. </string>
+    <string name="tcle_title_objetivo">Qual o objetivo do estudo?</string>
+    <string name="tcle_description_objetivo">Este estudo visa estabelecer a correlação entre características acústicas do ronco e de eventos respiratórios obstrutivos e a presença da Síndrome da Apnéia e Hipopnéia Obstrutiva do Sono, na qual é caracterizada pela parada momentânea da respiração durante alguns períodos da noite de sono.</string>
+    <string name="tcle_title_funcionamento">Como funciona?</string>
+    <string name="tcle_description_funcionamento">O aplicativo fará a gravação do áudio no ambiente doméstico do participante durante a sua noite de sono. O smartphone do participante deve ser posicionado ao lado da cama a uma distância aproximada de 50 cm para iniciar a gravação. O áudio será enviado através da Internet para um servidor responsável por processar e extrair os eventos respiratórios. Métricas de qualidade do sono e a correlação com a Apneia Obstrutiva do Sono serão calculadas através das características extraídas de cada evento respiratório detectado. Por fim, um relatório da sua noite de sono será apresentado para você através do aplicativo. Se você sentir algum desconforto neste processo, deverá informar ao pesquisador que tomará as medidas necessárias para sua assistência.</string>
+    <string name="tcle_title_risco">Este estudo apresenta algum risco?</string>
+    <string name="tcle_description_risco">O estudo não apresenta risco à saúde dos participantes e não causa desconforto durante a participação, visto que o experimento é totalmente não intrusivo. O risco mínimo refere-se à possibilidade de identificação do participante e para que isso não ocorra as informações coletadas serão armazenadas de maneira sigilosa. Este estudo foi aprovado pelo Comitê de Ética da Universidade Federal de Ciências da Saúde de Porto Alegre e há garantia de indenização por danos comprovadamente decorrentes da pesquisa.</string>
+    <string name="tcle_title_beneficio">Como vou me beneficiar participando do estudo?</string>
+    <string name="tcle_description_beneficio">Ganho de informação e autoconscientização acerca do seu próprio ronco. Ter a oportunidade de uma ação altruísta, que contribuirá para ajudar outros pacientes no futuro, com os frutos do estudo e do projeto. A participação na pesquisa não acarretará nenhum investimento financeiro de sua parte e este estudo não visa o diagnóstico de doenças. Portanto não será oferecido tratamento.</string>
+    <string name="tcle_title_sigilo">Meus dados pessoais serão mantidos em sigilo?</string>
+    <string name="tcle_description_sigilo">Sim, as informações coletadas serão armazenadas de maneira sigilosa e serão utilizadas apenas no contexto deste estudo. Os dados serão armazenados por, no mínimo, 5 anos, conforme legislação vigente do Conselho Nacional de Saúde. Os resultados poderão ser divulgados na literatura científica, contudo sem qualquer identificação dos participantes.</string>
+    <string name="tcle_title_desistir">Posso desistir a qualquer momento do estudo?</string>
+    <string name="tcle_description_desistir">Sim, a sua participação é voluntária e pode ser interrompida em qualquer momento, sem nenhum dano. Inclusive, o seu consentimento pode ser retirado em qualquer etapa da pesquisa.</string>
+    <string name="tcle_title_responsavel">Quem são os responsáveis pelo estudo?</string>
+    <string name="tcle_description_responsavel">O presente estudo é conduzido por pesquisadores do grupo de pesquisa DPAS da Universidade Federal de Ciências da Saúde de Porto Alegre. Diante de qualquer dúvida, informações sobre os procedimentos ou outros assuntos relacionados, favor entrar em contato através do telefone (51) 3303-8804 (Comitê de Ética em Pesquisa da UFCSPA - Rua Sarmento Leite, 245 - Porto Alegre) ou pelo email do grupo de pesquisa dpascontato@gmail.com.
+Você receberá uma via deste documento e a outra ficará com o pesquisador responsável.
+</string>
+    <string name="tcle_declaracao">Declaro estar ciente dos objetivos dessa pesquisa e concordo em participar desse estudo.</string>
+    <string name="tcle_declaracao_s">Sim</string>
+    <string name="tcle_declaracao_n">Não</string>
+
+
+
 
 
 </resources>
