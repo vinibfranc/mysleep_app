@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "534530719667",
-    "project_id": "mysleep-a4ac8"
+    "project_number": "991795765452",
+    "project_id": "mysleep-29f57"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:534530719667:android:5aac3ba5e7000f2c",
+        "mobilesdk_app_id": "1:991795765452:android:5aac3ba5e7000f2c",
         "android_client_info": {
           "package_name": "br.edu.ufcspa.snorlax_angelo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "534530719667-ecfe9gtk58u5v0m1j222idbh0qd53vk0.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "534530719667-179q2kvgalvgr6jak3u46catj4dsm1mt.apps.googleusercontent.com",
+          "client_id": "991795765452-p45577eueepel1p93ptfl1ciiqpm7gek.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.edu.ufcspa.snorlax_angelo",
-            "certificate_hash": "5e234cac17aaa492b72bc408fa7bb9f9c88992f2"
+            "certificate_hash": "f7318f66d0df43ae21d1e878031839f992696f19"
           }
+        },
+        {
+          "client_id": "991795765452-9un2emm89109pb5ermtv2l155ovvs1sn.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCHNf5wIZtniLvZbc76rDSJF2kmBqqjABc"
+          "current_key": "AIzaSyCRO3KT8tWJ4D_qtMASDtxd_fg0GsY3vbM"
         }
       ],
       "services": {

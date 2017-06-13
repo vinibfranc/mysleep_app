@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,8 +20,13 @@ import android.widget.Toast;
 
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginFragment;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONException;
@@ -42,7 +48,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignInListener, GooglePlusSignInHelper.OnGoogleSignInListener{
+public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignInListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "app";
     @Bind(R.id.progress_bar) ProgressBar progressBar;
     @Bind (R.id.login_facebook) ImageButton btFbLogin;
@@ -52,7 +58,9 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     LinearLayout view;*/
 
     private FbConnectHelper fbConnectHelper;
-    private GooglePlusSignInHelper gSignInHelper;
+    private GoogleApiClient mGoogleApiClient;
+    private final static int RC_SIGN_IN = 100;
+
 
     public FragmentLogin() {
         // Required empty public constructor
@@ -71,22 +79,45 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         ButterKnife.bind(this, view);
         setup();
 
+
+
+    }
+
+
+    private void setupGoogle(){
+
+        // [START configure_signin]
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        // [END configure_signin]
+
+        // [START build_client]
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getActivity() /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        // [END build_client]
+
+        // [START customize_button]
+        // Set the dimensions of the sign-in button.
+        // [END customize_button]
     }
 
 
 
     private void setup() {
-        GooglePlusSignInHelper.setClientID(AppConstants.GOOGLE_CLIENT_ID);
-        gSignInHelper = GooglePlusSignInHelper.getInstance();
-        gSignInHelper.initialize(getActivity(), this);
-
+        setupGoogle();
         fbConnectHelper = new FbConnectHelper(this,this);
-        //twitterConnectHelper = new TwitterConnectHelper(getActivity(), this);
     }
 
     @OnClick(R.id.login_google)
     public void loginwithGoogle(View view) {
-        gSignInHelper.signIn(getActivity());
+        signIn();
         setBackground();
     }
 
@@ -95,12 +126,6 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         fbConnectHelper.connect();
         setBackground();
     }
-
-  /*  @OnClick(R.id.login_twitter)
-    public void loginwithTwitter(View view) {
-        twitterConnectHelper.connect();
-        setBackground(R.color.twitter_color);
-    }*/
 
     private void setBackground()
     {
@@ -125,8 +150,7 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         fbConnectHelper.onActivityResult(requestCode, resultCode, data);
-        gSignInHelper.onActivityResult(requestCode, resultCode, data);
-        //twitterConnectHelper.onActivityResult(requestCode, resultCode, data);
+        getResult(requestCode,resultCode,data);
     }
 
     @Override
@@ -136,6 +160,11 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
             SharedPreferenceManager.getSharedInstance().saveUserModel(userModel);
             communicateWebService(userModel);
         }
+    }
+
+    @Override
+    public void OnFbError(String errorMessage) {
+        resetToDefaultView(errorMessage);
     }
 
     private UserModel getUserModelFromGraphResponse(GraphResponse graphResponse)
@@ -157,58 +186,9 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         return userModel;
     }
 
-    @Override
-    public void OnFbError(String errorMessage) {
-        resetToDefaultView(errorMessage);
-    }
 
-    @Override
-    public void OnGSignSuccess(GoogleSignInAccount acct, Person person) {
-        UserModel userModel = new UserModel();
-        userModel.userName = (acct.getDisplayName()==null)?"":acct.getDisplayName();
-        userModel.userEmail = acct.getEmail();
-        userModel.idGoogle=person.getId();
 
-        Log.i(TAG, "OnGSignSuccess: AccessToken "+ acct.getIdToken());
 
-        if(person!=null) {
-            int gender = person.getGender();
-
-            if (gender == 0)
-                userModel.gender = "MALE";
-            else if (gender == 1)
-                userModel.gender = "FEMALE";
-            else
-                userModel.gender = "OTHERS";
-
-            Log.i(TAG, "OnGSignSuccess: gender "+ userModel.gender);
-        }
-
-        Uri photoUrl = acct.getPhotoUrl();
-        if(photoUrl!=null)
-            userModel.profilePic = photoUrl.toString();
-        else
-            userModel.profilePic = "";
-        Log.i(TAG, acct.getIdToken());
-
-        SharedPreferenceManager.getSharedInstance().saveUserModel(userModel);
-        communicateWebService(userModel);
-    }
-
-    @Override
-    public void OnGSignError(GoogleSignInResult errorMessage) {
-        resetToDefaultView("Google Sign in error@");
-    }
-
-    private void startHomeActivity(UserModel userModel)
-    {
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
-        intent.putExtra(UserModel.class.getSimpleName(), userModel);
-        startActivity(intent);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            getActivity().finishAffinity();
-        }
-    }
 
 
 
@@ -225,20 +205,73 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         startHomeActivity(userModel);
     }
 
-   /* @Override
-    public void onTwitterSuccess(User user, String email) {
-        UserModel userModel = new UserModel();
-        userModel.userName = user.name;
-        userModel.userEmail = email;
-        userModel.profilePic = user.profileImageUrl;
 
-        SharedPreferenceManager.getSharedInstance().saveUserModel(userModel);
-        startHomeActivity(userModel);
+    // [START signIn]
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-*/
-    /*@Override
-    public void onTwitterError(String errorMessage) {
-        resetToDefaultView(errorMessage);
+
+
+
+    // [START onActivityResult]
+    public void getResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
     }
-}*/
+    // [END onActivityResult]
+
+    // [START handleSignInResult]
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+           /* mStatusTextView.setText();*/
+            Toast.makeText(getActivity(),"logado com sucesso!",Toast.LENGTH_SHORT).show();
+            Log.d("gsign",acct.getEmail()+"\n"+acct.getGivenName()+" " + acct.getFamilyName()+"\n"+acct.getId());
+
+            UserModel userModel = new UserModel();
+            userModel.userName = acct.getGivenName()+ " " + acct.getFamilyName() ;
+            userModel.userEmail = acct.getEmail();
+            userModel.idGoogle=acct.getId();
+            Uri photoUrl = acct.getPhotoUrl();
+            if(photoUrl!=null)
+                userModel.profilePic = photoUrl.toString();
+            else
+                userModel.profilePic = "";
+
+            SharedPreferenceManager.getSharedInstance().saveUserModel(userModel);
+            communicateWebService(userModel);
+
+        } else {
+            // Signed out, show unauthenticated UI.
+        }
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+    }
+
+
+
+    private void startHomeActivity(UserModel userModel)
+    {
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        intent.putExtra(UserModel.class.getSimpleName(), userModel);
+        startActivity(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            getActivity().finishAffinity();
+        }
+    }
+
+
 }
