@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="7pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title"
+                />
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_pesquisa"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_pesquisa"
+                />
+
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_objetivo"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_objetivo"
+                />
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_funcionamento"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_funcionamento"
+                />
+
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_risco"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_risco"
+                />
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_beneficio"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_beneficio"
+                />
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_sigilo"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_sigilo"
+                />
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_desistir"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_desistir"
+                />
+
+
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="inherit"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_title_responsavel"
+                />
+
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:layout_gravity="center_horizontal|right"
+                android:textStyle="normal"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_description_responsavel"
+                />
+
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="6pt"
+                android:textColor="@color/pallete_white"
+                android:text="@string/tcle_declaracao"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="OK"
+                android:id="@+id/tcle_ok"
+                />
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>

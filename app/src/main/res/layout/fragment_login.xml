@@ -95,17 +95,28 @@
 
         />
 
+    <TextView
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pallete_white"
+        android:text="@string/tcle_link"
+        android:fontFamily="sans-serif"
+        android:id="@+id/tx_tcle_link"
+        android:clickable="true" />
+
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         app:srcCompat="@drawable/dpas_branco"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:id="@+id/imageView3"
         android:layout_marginTop="10dp"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.1" />
 
 
 
