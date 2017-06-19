@@ -200,7 +200,7 @@ public class HomeActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.frame_content, new AboutFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.frame_content, new ViewMetricsFragment()).commit();
             toolbar.setTitle(R.string.about_app);
             return true;
 

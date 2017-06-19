@@ -1,11 +1,13 @@
 package br.edu.ufcspa.snorlax_angelo;
 
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -47,5 +49,12 @@ public class ReportFragment extends Fragment {
             RecordingAdapter adapter = new RecordingAdapter(recordingList,myView.getContext());
             myList.setAdapter(adapter);
         }
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.frame_content, new ViewMetricsFragment()).commit();
+            }
+        });
     }
 }
