@@ -240,7 +240,6 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             fragmentManager.beginTransaction().replace(R.id.frame_content, new SettingsFragment()).commit();
             toolbar.setTitle(R.string.title_fragment_about);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

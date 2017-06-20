@@ -33,6 +33,9 @@ public class LoginActivityApp extends AppCompatActivity
         if (getSupportFragmentManager().findFragmentById(R.id.frame_content) == null) {
             FragmentLogin loginFragment = new FragmentLogin();
 
+            TcleFragment fragment = new TcleFragment();
+
+
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
             loginFragment.setArguments(getIntent().getExtras());
@@ -45,10 +48,17 @@ public class LoginActivityApp extends AppCompatActivity
             @Override
             public void onBackPressed() {
                 super.onBackPressed();
-                FragmentLogin loginFragment = new FragmentLogin();
+                /*FragmentLogin loginFragment = new FragmentLogin();
                 loginFragment.setArguments(getIntent().getExtras());
-                //fragmentManager.beginTransaction().replace(R.id.frame_content, loginFragment).commit();
-                getSupportFragmentManager().beginTransaction().add(R.id.frame_content, loginFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, loginFragment).commit();*/
+
+               /* FragmentLogin frag = new FragmentLogin();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.frame_content, loginFragment, null)
+                        .addToBackStack(null)
+                        .commit();
+
+                getSupportFragmentManager().beginTransaction().add(R.id.frame_content, loginFragment).commit();*/
             }
 
             @Override

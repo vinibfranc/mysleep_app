@@ -2,12 +2,16 @@ package br.edu.ufcspa.snorlax_angelo;
 
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +32,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.model.people.Person;
+import br.edu.ufcspa.snorlax_angelo.TcleFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +58,7 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     @Bind(R.id.progress_bar) ProgressBar progressBar;
     @Bind (R.id.login_facebook) ImageButton btFbLogin;
     @Bind (R.id.login_google) ImageButton btGmLogin;
+    @Bind (R.id.tx_tcle_link) TextView txTcleLink;
 
    /* @Bind(R.id.login_layout)
     LinearLayout view;*/
@@ -73,16 +79,16 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        txTcleLink.setPaintFlags(txTcleLink.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
         setup();
-
-
-
     }
-
 
     private void setupGoogle(){
 
@@ -99,13 +105,28 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         // options specified by gso.
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .enableAutoManage(getActivity() /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+
         // [END build_client]
 
         // [START customize_button]
         // Set the dimensions of the sign-in button.
         // [END customize_button]
+
+
+
+
+
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.stopAutoManage((getActivity()));
+            mGoogleApiClient.disconnect();
+        }
     }
 
 
@@ -120,6 +141,37 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         signIn();
         setBackground();
     }
+
+
+    @OnClick(R.id.tx_tcle_link)
+    public void goToTcle(View view) {
+
+
+        mGoogleApiClient.stopAutoManage(getActivity());
+        mGoogleApiClient.disconnect();
+
+        TcleFragment frag = new TcleFragment();
+        this.getFragmentManager().beginTransaction()
+                .replace(R.id.frame_content, frag, null)
+                .addToBackStack(null)
+                .commit();
+
+
+        /*FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
+        fragmentTransaction.add(R.id.frame_content, frag);
+
+        fragmentTransaction.commit();*/
+
+
+    }
+
+
+
+
+
 
     @OnClick(R.id.login_facebook)
     public void loginwithFacebook(View view) {
@@ -271,6 +323,14 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             getActivity().finishAffinity();
         }
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mGoogleApiClient.stopAutoManage(getActivity());
+        mGoogleApiClient.disconnect();
     }
 
 
