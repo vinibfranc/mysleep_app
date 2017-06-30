@@ -28,6 +28,10 @@ import ufcspa.edu.br.snorlax_angelo.R;
 
 /**
  * Created by icaromsc on 19/06/2017.
+ *
+ * Fragment para exibição das métricas da gravação
+ *
+ *
  */
 
 public class ViewMetricsFragment extends Fragment {

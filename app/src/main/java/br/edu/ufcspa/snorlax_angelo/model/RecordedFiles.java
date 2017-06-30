@@ -2,6 +2,8 @@ package br.edu.ufcspa.snorlax_angelo.model;
 
 /**
  * Created by icaromsc on 18/01/2017.
+ *
+ * Classe modelo de arquivo de gravação do banco de dados
  */
 
 public class RecordedFiles {

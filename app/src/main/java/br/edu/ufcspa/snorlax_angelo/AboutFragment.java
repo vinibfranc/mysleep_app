@@ -11,7 +11,7 @@ import ufcspa.edu.br.snorlax_angelo.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment about app
  */
 public class AboutFragment extends Fragment {
 

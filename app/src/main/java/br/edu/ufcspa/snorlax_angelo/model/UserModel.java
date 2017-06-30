@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 /**
  * Created by Arun on 06-09-2015.
+ *
+ * Modelo de perfil de usuario no app recuperado da API google/Facebook
+ *
  */
 public class UserModel implements Parcelable {
 

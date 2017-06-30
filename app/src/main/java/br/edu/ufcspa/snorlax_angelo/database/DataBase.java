@@ -15,6 +15,11 @@ import java.io.OutputStream;
 public class DataBase extends SQLiteOpenHelper {
 
     /**
+     *
+     * Classe responsavel por ler arquivo SQLITE do banco de dados do app na pasta assets
+     *
+     *
+     *
      * Este é o endereço onde o android salva os bancos de dados criado pela aplicação,
      * /data/data/<namespace da aplicacao>/databases/
      */
@@ -22,11 +27,7 @@ public class DataBase extends SQLiteOpenHelper {
     private static DataBase mInstance = null;
 
     // Este é o nome do banco de dados que iremos utilizar
-    //private static String DBNAME = "folio.sqlite"; //Classe SplashActivity => LoginActivity2
-    //private static String DBNAME ="json.sqlite";
     private static String DBNAME = "mysleep_alpha.sqlite";
-    //private static String DBNAME = "db_portfolio_alpha_ambiente_teste.sqlite";
-
     private Context context;
 
     /**
@@ -54,7 +55,7 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     /**
-     * Os métodos onCreate e onUpgrade precisam ser sobreescrito
+     * Os métodos onCreate e onUpgrade precisam ser sobreescritos
      */
     @Override
     public void onCreate(SQLiteDatabase db) {

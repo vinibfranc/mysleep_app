@@ -18,7 +18,7 @@ import ufcspa.edu.br.snorlax_angelo.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment que mostra lista das gravações efetuadas no app
  */
 public class ReportFragment extends Fragment {
     View myView;

@@ -1,11 +1,6 @@
 package br.edu.ufcspa.snorlax_angelo;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,6 +9,9 @@ import android.widget.FrameLayout;
 
 import ufcspa.edu.br.snorlax_angelo.R;
 
+/**
+ * Actvity de login no app, popula {@link FragmentLogin}  na view
+ */
 public class LoginActivityApp extends AppCompatActivity
         {
     FrameLayout content;
@@ -25,22 +23,9 @@ public class LoginActivityApp extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         content = (FrameLayout) findViewById(R.id.frame_content);
-      /*  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();*/
         if (getSupportFragmentManager().findFragmentById(R.id.frame_content) == null) {
             FragmentLogin loginFragment = new FragmentLogin();
-
-            TcleFragment fragment = new TcleFragment();
-
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
             loginFragment.setArguments(getIntent().getExtras());
-            //fragmentManager.beginTransaction().replace(R.id.frame_content, loginFragment).commit();
-
             getSupportFragmentManager().beginTransaction().add(R.id.frame_content, loginFragment).commit();
         }
     }
@@ -48,17 +33,6 @@ public class LoginActivityApp extends AppCompatActivity
             @Override
             public void onBackPressed() {
                 super.onBackPressed();
-                /*FragmentLogin loginFragment = new FragmentLogin();
-                loginFragment.setArguments(getIntent().getExtras());
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, loginFragment).commit();*/
-
-               /* FragmentLogin frag = new FragmentLogin();
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.frame_content, loginFragment, null)
-                        .addToBackStack(null)
-                        .commit();
-
-                getSupportFragmentManager().beginTransaction().add(R.id.frame_content, loginFragment).commit();*/
             }
 
             @Override

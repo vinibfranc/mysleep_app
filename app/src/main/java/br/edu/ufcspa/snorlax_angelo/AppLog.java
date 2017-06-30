@@ -2,6 +2,7 @@ package br.edu.ufcspa.snorlax_angelo;
 
 /**
  * Created by Carlos on 19/12/2015.
+ * Classe para armazenar tipos de log do app para visualizar no logcat
  */
 import android.util.Log;
 

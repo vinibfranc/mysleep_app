@@ -12,14 +12,23 @@ import java.net.URL;
 
 import br.edu.ufcspa.snorlax_angelo.database.DataBaseAdapter;
 import br.edu.ufcspa.snorlax_angelo.model.RecordedFiles;
-import br.edu.ufcspa.snorlax_angelo.model.UploadFile;
 
 /**
  * Created by icaromsc on 15/02/2017.
+ *
+ * Classe responsável por realizar upload de arquivos para o servidor
  */
 
 public class UploadFilesAsync extends AsyncTask<RecordedFiles, Void, String> {
     private static final String TAG ="snorlax_async";
+    private static final int OK = 200;
+
+
+    /**
+     * Faz upload de cada arquivo para servidor
+     * @param params Lista de objetos @RecordedFiles
+     * @return String que executou a tarefa
+     */
     @Override
     protected String doInBackground(RecordedFiles... params) {
         Log.d(TAG, "open task...");
@@ -30,7 +39,10 @@ public class UploadFilesAsync extends AsyncTask<RecordedFiles, Void, String> {
         return "Executed";
     }
 
-
+    /**
+     * Realizar upload via HTTP
+     * @param file
+     */
     public void upload(RecordedFiles file){
         try {
             Log.d(TAG, "async task source file:" + file.getFilename());
@@ -109,7 +121,7 @@ public class UploadFilesAsync extends AsyncTask<RecordedFiles, Void, String> {
                     String serverResponseMessage = conn
                             .getResponseMessage();
 
-                    if (serverResponseCode == 200) {
+                    if (serverResponseCode == OK) {
                         Log.d(TAG, "File upload complete");
                         Log.d(TAG, serverResponseMessage);
                         updateStatusOnDatabase(file.getIdRecordedFile());
@@ -144,6 +156,11 @@ public class UploadFilesAsync extends AsyncTask<RecordedFiles, Void, String> {
         }
     }
 
+
+    /**
+     * Deleta o arquivo após upload
+     * @param filename path+arquivo
+     */
     private void deleteTempFile(String filename) {
         File file = new File(filename);
         try {
@@ -154,6 +171,11 @@ public class UploadFilesAsync extends AsyncTask<RecordedFiles, Void, String> {
         }
     }
 
+
+    /**
+     * atualiza status do arquivo de gravação para Finalizado após upload
+     * @param idRecordedFile
+     */
     private void updateStatusOnDatabase(int idRecordedFile){
         DataBaseAdapter data = DataBaseAdapter.getInstance(null);
         RecordedFiles r = new RecordedFiles(idRecordedFile,RecordedFiles.STATUS_UPLOAD_FINISHED);

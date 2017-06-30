@@ -1,7 +1,6 @@
 package br.edu.ufcspa.snorlax_angelo.view;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
@@ -39,7 +37,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import br.edu.ufcspa.snorlax_angelo.AppLog;
 import br.edu.ufcspa.snorlax_angelo.InfoActivity;
@@ -48,7 +45,6 @@ import br.edu.ufcspa.snorlax_angelo.database.DataBaseAdapter;
 import br.edu.ufcspa.snorlax_angelo.managers.SharedPreferenceManager;
 import br.edu.ufcspa.snorlax_angelo.model.RecordedFiles;
 import br.edu.ufcspa.snorlax_angelo.model.Recording;
-import br.edu.ufcspa.snorlax_angelo.view.UploadFileAsync;
 import ufcspa.edu.br.snorlax_angelo.R;
 
 
@@ -64,58 +60,32 @@ public class RecordFragment extends Fragment {
     private static final String AUDIO_RECORDER_FOLDER = "Snore_angELO";
     private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw";
     private static final int RECORDER_SAMPLERATE = 44100;
-    static boolean uploadingFile;
-
-    String fileToBeUploaded;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
     private static final int MAX_RECORDING_TIME = 48;
-    FileInputStream inAudioData = null;
-    private static final long BYTES_HORA = 320197200;
-    String filename;
     private AudioRecord recorder = null;
     private int bufferSize = 0;
     private Thread recordingThread = null;
-    private Thread processingThread = null;
     private boolean isRecording = false;
-    private boolean isProcessing = false;
     String fileToprocess = "";
     String logApp="app";
     private static final int RESULT_INSTRUCTIONS = 42;
-
-
     private int tempNumber=0;
-
-
-    int serverResponseCode = 0;
-    private ProgressDialog dialog = null;
-
-    String upLoadServerUri = "http://angelo.inf.ufrgs.br/snorlax/UploadToServer.php";
-
-    private Chronometer cronometro;
-    private Button btn_gravacao;
-    private TextView txt_status;
-
-
-    private AlertDialog alerta;
-    private AlertDialog.Builder builder;
-    private RelativeLayout recording_message;
-
-    View myView;
     private int idRecording = 0;
     private int codUser = 0;
 
 
-
-
-
-
-
+    private Chronometer cronometro;
+    private Button btn_gravacao;
+    private TextView txt_status;
+    private AlertDialog alerta;
+    private AlertDialog.Builder builder;
+    private RelativeLayout recording_message;
+    View myView;
 
 
 
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -239,6 +209,10 @@ public class RecordFragment extends Fragment {
             mountRecording();
     }
 
+
+    /**
+     * configura view para inicialização da  gravação
+     */
     private void mountRecording(){
         if(getActivity()!=null) {
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -254,7 +228,9 @@ public class RecordFragment extends Fragment {
         Toast.makeText(getActivity().getApplicationContext(),"Good night!",Toast.LENGTH_SHORT).show();
     }
 
-
+    /**
+     * configura view para finalização da gravação
+     */
     private void dismountRecording(){
         AppLog.logString("Stop Recording");
         recording_message.setVisibility(View.INVISIBLE);
@@ -268,7 +244,10 @@ public class RecordFragment extends Fragment {
     }
 
 
-
+    /**
+     * verifica conectividade com intenet
+     * @return
+     */
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -277,7 +256,10 @@ public class RecordFragment extends Fragment {
     }
 
 
-
+    /**
+     *
+     * @return nome do arquivo de gravação
+     */
     private String getTempFilename(){
         String filepath = Environment.getExternalStorageDirectory().getPath();
         File file = new File(filepath,AUDIO_RECORDER_FOLDER);
@@ -295,8 +277,10 @@ public class RecordFragment extends Fragment {
     }
 
 
-
-
+    /**
+     * configura nome do arquivo de gravação
+     * @return
+     */
     private String createFilename(){
         tempNumber++;
         /*Calendar c = Calendar.getInstance();
@@ -317,6 +301,10 @@ public class RecordFragment extends Fragment {
         super.onStart();
     }
 
+
+    /**
+     * inicializa thread de gravação
+     */
     private void startRecording(){
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 RECORDER_SAMPLERATE, RECORDER_CHANNELS,RECORDER_AUDIO_ENCODING, bufferSize);
@@ -338,32 +326,11 @@ public class RecordFragment extends Fragment {
     }
 
 
-
-
-    /* -----------antigo método---------------
-
-     RECORDING THREAD *//*
-
+    /**
+     * Thread de gravação do audio
+     */
     private void getAudioData(){
         fileToprocess = "";
-        isProcessing = true;
-        idRecording = saveRecordingOnDatabase();
-        DataBaseAdapter data = DataBaseAdapter.getInstance(myView.getContext());
-        codUser=data.getUserId();
-        while(isRecording) {
-            fileToprocess = writeAudioDataToFile(record_size);
-            Log.d(logApp,"salvou arquivo, salvando agora no banco");
-            saveTempRecordingFile(fileToprocess,idRecording,tempNumber);
-        }
-        isProcessing = false;
-    }*/
-
-
-
-    /* RECORDING THREAD NOVO MÉTODO */
-    private void getAudioData(){
-        fileToprocess = "";
-        isProcessing = true;
         idRecording = saveRecordingOnDatabase();
         DataBaseAdapter data = DataBaseAdapter.getInstance(myView.getContext());
         codUser=data.getUserId();
@@ -392,16 +359,17 @@ public class RecordFragment extends Fragment {
                         txt_status.setText(getString(R.string.start_capture));
                     }
                 });
-                //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);*/
                 break;
             }
         }
-        isProcessing = false;
     }
 
 
-
-
+    /**
+     * grava trecho de audio
+     * @param record_size tempo de gravação
+     * @return nome do arquivo gerado
+     */
     private String writeAudioDataToFile(long record_size){
         byte data[] = new byte[bufferSize];
         String filename = getTempFilename();
@@ -417,7 +385,6 @@ public class RecordFragment extends Fragment {
             Log.d(logApp,"entrou no try");
             os = new FileOutputStream(filename);
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             Log.d(logApp,"entrou no catch");
             e.printStackTrace();
         }
@@ -436,9 +403,6 @@ public class RecordFragment extends Fragment {
                     try {
                         c = Calendar.getInstance();
                         dateAtual=c.getTime();
-                        /*Log.d(logApp,"data atual:"+dateStart.getTime());
-                        Log.d(logApp,"compare datas:"+(dateAtual.getTime()-dateStart.getTime()));*/
-
                         if ((dateAtual.getTime() - dateStart.getTime()) > record_size){
                             Log.d(logApp,"entrou no no if para gravar em partes");
                             limiteTime = false;
@@ -461,22 +425,21 @@ public class RecordFragment extends Fragment {
         }else{
             Log.d(logApp,"os empty");
         }
-
         return filename;
     }
 
+    /**
+     * configura view para finalizar gravação
+     */
     private void stopRecording(){
         if(null != recorder){
             isRecording = false;
-
             recorder.stop();
             recorder.release();
             // update on SQLITE recording status and
             updateRecording(idRecording,getActualDate());
             recorder = null;
             recordingThread = null;
-
-            processingThread = null;
             listRecordings();
 
         }else{
@@ -485,7 +448,12 @@ public class RecordFragment extends Fragment {
 
     }
 
-
+    /**
+     * salva arquivo de gravação no banco de dados
+     * @param filename
+     * @param idRecording
+     * @param sequence
+     */
     private void saveTempRecordingFile(String filename,int idRecording,Integer sequence){
         Log.d("database","salvando temp recording file[ filename: "+filename+" idRec:"+idRecording+" sequence:"+ sequence +" ]");
         RecordedFiles rec = new RecordedFiles(idRecording,sequence,filename,null);
@@ -493,7 +461,10 @@ public class RecordFragment extends Fragment {
         data.insertRecordedFile(rec);
     }
 
-
+    /**
+     *
+     * @return data formatada
+     */
     private String getActualDate(){
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
@@ -502,7 +473,11 @@ public class RecordFragment extends Fragment {
 
     }
 
-
+    /**
+     * atualiza gravação no banco de dados
+     * @param idRecording
+     * @param date
+     */
     private void updateRecording(int idRecording,String date){
         DataBaseAdapter data = DataBaseAdapter.getInstance(getActivity());
         Recording recording = new Recording(idRecording,null,date,null);
@@ -512,12 +487,19 @@ public class RecordFragment extends Fragment {
             Log.e("database","error updating recording");
     }
 
-
+    /**
+     * salva gravação no banco de dados
+     * @return
+     */
     private int saveRecordingOnDatabase(){
         DataBaseAdapter data = DataBaseAdapter.getInstance(getActivity());
         return data.insertRecording(new Recording(0,getActualDate(),null,null));
     }
 
+
+    /**
+     * lista gravações e arquivos de gravações no logcat
+     */
     private void listRecordings() {
         DataBaseAdapter data = DataBaseAdapter.getInstance(getActivity());
         ArrayList<RecordedFiles> recordedFilesArrayList = (ArrayList<RecordedFiles>) data.getRecordedFiles();

@@ -20,6 +20,8 @@ import ufcspa.edu.br.snorlax_angelo.R;
 
 /**
  * Created by icaromsc on 14/02/2017.
+ *
+ * Adapter para pupular @{@link Recording} de gravação na listView
  */
 
 public class RecordingAdapter extends BaseAdapter {

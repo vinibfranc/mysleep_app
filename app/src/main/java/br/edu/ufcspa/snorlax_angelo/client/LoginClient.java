@@ -17,6 +17,9 @@ import br.edu.ufcspa.snorlax_angelo.model.User;
 
 /**
  * Created by icaromsc on 13/02/2017.
+ *
+ * Classe para comunicar com web service e realizar login no app
+ *
  */
 
 public class LoginClient extends HttpClient{

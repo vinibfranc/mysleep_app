@@ -17,6 +17,9 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by icaromsc on 29/03/2017.
+ *
+ * Classe com métodos diversos para ulitização no app
+ *
  */
 
 public class Utilities {
@@ -50,7 +53,12 @@ public class Utilities {
     }
 
 
-
+    /**
+     * método para verificar se um serviço esta em andamento no Android
+     * @param serviceClass
+     * @param ct
+     * @return boolean se o serviço esta rodando
+     */
     public static boolean isMyServiceRunning(Class<?> serviceClass,Context ct) {
         ActivityManager manager = (ActivityManager) ct.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -61,6 +69,12 @@ public class Utilities {
         return false;
     }
 
+
+    /**
+     * Método que verifica conexão com internet
+     * @param ct
+     * @return boolean há conexão com internet
+     */
 
     public static boolean isOnline(Context ct) {
         ConnectivityManager cm =

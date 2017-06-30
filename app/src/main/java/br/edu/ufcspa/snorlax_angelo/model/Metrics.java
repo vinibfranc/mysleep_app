@@ -2,6 +2,9 @@ package br.edu.ufcspa.snorlax_angelo.model;
 
 /**
  * Created by icaromsc on 19/06/2017.
+ *
+ * Classe modelo de Metricas para plotagem no grafico
+ *
  */
 
 public class Metrics {

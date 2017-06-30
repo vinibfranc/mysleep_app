@@ -13,7 +13,7 @@ import ufcspa.edu.br.snorlax_angelo.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment de Settings
  */
 public class SettingsFragment extends Fragment {
 

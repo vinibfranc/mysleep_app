@@ -5,6 +5,10 @@ import org.json.JSONObject;
 
 /**
  * Created by icaromsc on 03/05/2017.
+ *
+ * Classe modelo de resposta do usuario do questionario {@link Question}
+ *
+ *
  */
 
 public class Answer {

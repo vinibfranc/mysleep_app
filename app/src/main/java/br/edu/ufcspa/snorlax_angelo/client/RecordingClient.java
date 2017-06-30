@@ -17,6 +17,8 @@ import br.edu.ufcspa.snorlax_angelo.model.SendRecording;
 
 /**
  * Created by icaromsc on 17/03/2017.
+ *
+ * Classe responsavel por comunicar com web service para registrar a gravação
  */
 
 public class RecordingClient extends HttpClient {

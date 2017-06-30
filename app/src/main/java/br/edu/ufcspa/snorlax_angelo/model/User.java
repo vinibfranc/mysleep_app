@@ -5,6 +5,9 @@ import org.json.JSONObject;
 
 /**
  * Created by icaromsc on 18/01/2017.
+ *
+ * Classe modelo de Usuario do app
+ *
  */
 
 public class User {

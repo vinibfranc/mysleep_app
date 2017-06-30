@@ -11,6 +11,9 @@ import br.edu.ufcspa.snorlax_angelo.managers.SharedPreferenceManager;
 
 /**
  * Created by Icarus on 14/01/2017.
+ *
+ * Classe Aplication para conectar com api do facebook
+ *
  */
 
 public class App extends Application implements Application.ActivityLifecycleCallbacks {

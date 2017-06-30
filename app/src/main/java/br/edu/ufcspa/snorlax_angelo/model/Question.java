@@ -6,6 +6,9 @@ import java.util.LinkedList;
 
 /**
  * Created by icaromsc on 28/04/2017.
+ *
+ * Classe modelo de questionario do banco de dados
+ *
  */
 
 public class Question implements Serializable{

@@ -13,6 +13,9 @@ import ufcspa.edu.br.snorlax_angelo.R;
 
 /**
  * Created by icaromsc on 13/06/2017.
+ *
+ * Fragment dos termos de uso do app
+ *
  */
 
 public class TcleFragment extends Fragment {

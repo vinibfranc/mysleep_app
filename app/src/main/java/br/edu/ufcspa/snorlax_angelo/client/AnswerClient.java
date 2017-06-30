@@ -17,6 +17,8 @@ import br.edu.ufcspa.snorlax_angelo.model.Answer;
 
 /**
  * Created by icaromsc on 03/05/2017.
+ *
+ * Classe responsavel por comunicar com web service e registrar resposta da pergunta respondida pelo usuario
  */
 
 public class AnswerClient extends HttpClient{

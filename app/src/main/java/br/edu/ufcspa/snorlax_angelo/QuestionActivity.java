@@ -19,6 +19,10 @@ import br.edu.ufcspa.snorlax_angelo.model.Question;
 import br.edu.ufcspa.snorlax_angelo.model.UserModel;
 import ufcspa.edu.br.snorlax_angelo.R;
 
+
+/**
+ * Activity de questionario do app, exibe uma @{@link Question} na view
+ */
 public class QuestionActivity extends AppCompatActivity {
 
     ListView lvOptions;

@@ -2,6 +2,8 @@ package br.edu.ufcspa.snorlax_angelo.constants;
 
 /**
  * Created by Arun on 06-09-2015.
+ *
+ * Classe que armazena constantes que seão salvar no @{@link br.edu.ufcspa.snorlax_angelo.model.UserModel}
  */
 public class AppConstants {
 

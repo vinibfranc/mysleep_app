@@ -42,6 +42,11 @@ import br.edu.ufcspa.snorlax_angelo.model.User;
 import butterknife.ButterKnife;
 import ufcspa.edu.br.snorlax_angelo.R;
 
+
+/**
+ * Activity principal do app, Inicia Serviço @{@link UpService} , recupera o perfil do usuario @{@link UserModel} e controla as transições entre as fragments
+ *
+ */
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FrameLayout content;
@@ -69,10 +74,12 @@ public class HomeActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-
         content = (FrameLayout) findViewById(R.id.frame_content);
 
-        Log.d("infodevice","android version:"+Utilities.getAndroidVersion()+" model:"+ Utilities.getPhoneModel() + " space MB:" + Utilities.getAvailableSpaceInMB());
+
+
+        Log.d("infodevice","android version:"+Utilities.getAndroidVersion()+
+                " model:"+ Utilities.getPhoneModel() + " space MB:" + Utilities.getAvailableSpaceInMB());
 
 
 
@@ -86,15 +93,20 @@ public class HomeActivity extends AppCompatActivity
         nameTextView = (TextView) navigationView.findViewById(R.id.txtViewNameUser);
         emailTextView = (TextView) navigationView.findViewById(R.id.txtViewEmailUser);
         simpleDraweeView = (SimpleDraweeView) navigationView.findViewById(R.id.user_imageview);
-
-
         navigationView.setNavigationItemSelectedListener(this);
+        toolbar.setTitle(R.string.title_fragment_record);
 
 
+        /**
+         * pupula fragment inicial na activity
+         */
         if (getFragmentManager().findFragmentById(R.id.frame_content) == null) {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_content, new RecordFragment()).commit();
         }
+
+
+
         Log.d("app", " getting userModel");
         UserModel userModel = getUserModelFromIntent();
         if (userModel != null) {
@@ -114,8 +126,19 @@ public class HomeActivity extends AppCompatActivity
 
 
 
+        /**  inicializa service de upload dos audios */
+        inicializaService();
 
 
+
+
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+    }
+
+
+    public void inicializaService(){
         if(!isMyServiceRunning(UpService.class)) {
             Intent intent = new Intent(this, UpService.class);
             Log.d("snorlax", "iniciando service...");
@@ -123,45 +146,29 @@ public class HomeActivity extends AppCompatActivity
         }else{
             Log.w("snorlax", "service ja esta rodando...");
         }
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-        toolbar.setTitle(R.string.title_fragment_record);
-
     }
 
 
-
+    /**
+     * altera dados da navigation view
+     * @param userModel
+     */
     private void setDataOnNavigationView(UserModel userModel) {
         if (navigationView != null) {
             setupDrawerContent(userModel);
         }
-
-
-
-        /*navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        switch (menuItem.getItemId()) {
-                            case R.id.nav_sign_out:
-                                drawerLayout.closeDrawers();
-                                SharedPreferenceManager.getSharedInstance().clearAllPreferences();
-                                startLoginActivity();
-                                return true;
-                            default:
-                                return true;
-                        }
-                    }
-                });*/
     }
 
-
+    /**
+     *
+     * adiciona dados do perfil do usuario na navigation view
+     * @param userModel
+     */
     private void setupDrawerContent(UserModel userModel) {
         View headerView = navigationView.getHeaderView(0);
         Log.d("app", " user email:" + userModel.userEmail);
         Log.d("app", " user name:" + userModel.userName);
-        simpleDraweeView = ButterKnife.findById(headerView, R.id.user_imageview);
+        //simpleDraweeView = ButterKnife.findById(headerView, R.id.user_imageview);
         //simpleDraweeView.setImageURI(Uri.parse(userModel.profilePic));
         //simpleDraweeView.setBackgroundResource(R.drawable.icone_app2);
 
@@ -215,6 +222,12 @@ public class HomeActivity extends AppCompatActivity
         super.startActivityForResult(intent, requestCode);
     }
 
+
+    /**
+     * controla qual fragment iniciar de acordo com escolha do item do menu pelo usuario
+     * @param item do menu
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -248,10 +261,17 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
+    /**
+     *
+     * @return UserModel da Activity anterior
+     */
     private UserModel getUserModelFromIntent() {
         Intent intent = getIntent();
         return intent.getParcelableExtra(UserModel.class.getSimpleName());
     }
+
+
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -289,6 +309,10 @@ public class HomeActivity extends AppCompatActivity
         client.disconnect();
     }
 
+    /** verifica se há um serviço ativo no Android
+     * @param serviceClass Classe do tipo Service
+     * @return boolean se o serviço esta ativo no Android
+     */
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {

@@ -51,7 +51,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment de login no app, conecta com API do google e facebook
  */
 public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignInListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "app";
@@ -84,12 +84,13 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
         txTcleLink.setPaintFlags(txTcleLink.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-
         setup();
     }
 
+    /**
+     * inicializa google api
+     */
     private void setupGoogle(){
 
         // [START configure_signin]
@@ -106,17 +107,6 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .enableAutoManage(getActivity() /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
-
-        // [END build_client]
-
-        // [START customize_button]
-        // Set the dimensions of the sign-in button.
-        // [END customize_button]
-
-
-
-
-
     }
 
 
@@ -130,19 +120,30 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     }
 
 
-
+    /**
+     * inicializa APIs google e facebook
+     */
     private void setup() {
         setupGoogle();
         fbConnectHelper = new FbConnectHelper(this,this);
     }
 
+
+
+    /**
+     * metodo para tratar evento de clique no botao login com google
+     * @param view
+     */
     @OnClick(R.id.login_google)
     public void loginwithGoogle(View view) {
         signIn();
         setBackground();
     }
 
-
+    /**
+     * metodo para tratar evento de clique no botao termos de uso
+     * @param view
+     */
     @OnClick(R.id.tx_tcle_link)
     public void goToTcle(View view) {
 
@@ -155,24 +156,13 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
                 .replace(R.id.frame_content, frag, null)
                 .addToBackStack(null)
                 .commit();
-
-
-        /*FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-
-        fragmentTransaction.add(R.id.frame_content, frag);
-
-        fragmentTransaction.commit();*/
-
-
     }
 
 
-
-
-
-
+    /**
+     * metodo para tratar evento de clique no botao login ocm facebook
+     * @param view
+     */
     @OnClick(R.id.login_facebook)
     public void loginwithFacebook(View view) {
         fbConnectHelper.connect();
@@ -188,6 +178,11 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         btGmLogin.setVisibility(View.GONE);
     }
 
+
+    /**
+     * reseta componentes da view
+     * @param message
+     */
     private void resetToDefaultView(String message)
     {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -198,6 +193,8 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         btGmLogin.setVisibility(View.VISIBLE);
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -205,6 +202,11 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         getResult(requestCode,resultCode,data);
     }
 
+
+    /**
+     * salva @{@link UserModel} no app com infos da facebook api
+     * @param graphResponse
+     */
     @Override
     public void OnFbSuccess(GraphResponse graphResponse) {
         UserModel userModel = getUserModelFromGraphResponse(graphResponse);
@@ -219,6 +221,12 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         resetToDefaultView(errorMessage);
     }
 
+
+    /**
+     * recupera infos da api do facebook
+     * @param graphResponse
+     * @return @{@link UserModel}
+     */
     private UserModel getUserModelFromGraphResponse(GraphResponse graphResponse)
     {
         UserModel userModel = new UserModel();
@@ -239,11 +247,10 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     }
 
 
-
-
-
-
-
+    /**
+     * Comunica com web service para realizar login no app
+     * @param userModel
+     */
     private void communicateWebService(UserModel userModel){
         User u = new User(0,userModel.idGoogle,userModel.idFacebook,userModel.userName,userModel.userEmail,userModel.profilePic);
         u.setSmartphoneInfo("android version:"+Utilities.getAndroidVersion()+" model:"+ Utilities.getPhoneModel() + " space MB:" + Utilities.getAvailableSpaceInMB());
@@ -258,42 +265,51 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     }
 
 
-    // [START signIn]
+    /**
+     * autentica na google api
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 
-
-    // [START onActivityResult]
+    /**
+     * onActivityResult da google api
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void getResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
     }
-    // [END onActivityResult]
 
-    // [START handleSignInResult]
+    /**
+     * recupera dados da api do google, salva {@link UserModel} e envia dados para web service
+     * @param result
+     */
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-
-           /* mStatusTextView.setText();*/
             Toast.makeText(getActivity(),"logado com sucesso!",Toast.LENGTH_SHORT).show();
             Log.d("gsign",acct.getEmail()+"\n"+acct.getGivenName()+" " + acct.getFamilyName()+"\n"+acct.getId());
+
+
 
             UserModel userModel = new UserModel();
             userModel.userName = acct.getGivenName()+ " " + acct.getFamilyName() ;
             userModel.userEmail = acct.getEmail();
             userModel.idGoogle=acct.getId();
             Uri photoUrl = acct.getPhotoUrl();
+
+
+
             if(photoUrl!=null)
                 userModel.profilePic = photoUrl.toString();
             else
@@ -314,7 +330,10 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
     }
 
 
-
+    /**
+     * inicia {@link HomeActivity}
+     * @param userModel
+     */
     private void startHomeActivity(UserModel userModel)
     {
         Intent intent = new Intent(getActivity(), HomeActivity.class);
@@ -325,7 +344,9 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         }
     }
 
-
+    /**
+     * Disconecta da api do Google
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -19,6 +19,8 @@ import br.edu.ufcspa.snorlax_angelo.model.Question;
 
 /**
  * Created by icaromsc on 28/04/2017.
+ *
+ * Classe responsavel por comunicar com webService e baixar uma pergunta
  */
 
 public class QuestionClient extends HttpClient {

@@ -5,6 +5,8 @@ import org.json.JSONObject;
 
 /**
  * Created by icaromsc on 17/03/2017.
+ *
+ * Classe modelo da Recording do banco de dados
  */
 
 public class SendRecording {

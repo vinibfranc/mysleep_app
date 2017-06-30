@@ -25,6 +25,9 @@ import java.util.Collection;
 
 /**
  * FbConnectHelper.java
+ *
+ * Classe responsavel por gerenciar conexão com api do facebook
+ *
  */
 public class FbConnectHelper {
     private Collection<String> permissions = Arrays.asList("public_profile ", "email", "user_birthday", "user_location");

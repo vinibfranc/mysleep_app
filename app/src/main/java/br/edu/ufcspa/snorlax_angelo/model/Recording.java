@@ -4,6 +4,8 @@ import java.util.Date;
 
 /**
  * Created by icaromsc on 18/01/2017.
+ *
+ * Modelo de Recording
  */
 
 public class Recording {

@@ -8,7 +8,9 @@ import br.edu.ufcspa.snorlax_angelo.constants.AppConstants;
 import br.edu.ufcspa.snorlax_angelo.model.UserModel;
 import ufcspa.edu.br.snorlax_angelo.R;
 
-
+/**
+ * Classe responsavel por gerenciar @{@link UserModel} salvo no banco interno do app
+ */
 public class SharedPreferenceManager {
 
     private static final String EMPTY_STRING = "";

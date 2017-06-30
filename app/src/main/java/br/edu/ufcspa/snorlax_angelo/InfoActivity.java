@@ -11,11 +11,15 @@ import br.edu.ufcspa.snorlax_angelo.managers.SharedPreferenceManager;
 import ufcspa.edu.br.snorlax_angelo.R;
 
 /**
- * Created by Silmara on 15/04/2017.
+ * Created by icaroms on 15/04/2017.
+ *
+ * Activity que mostra Slideview do tutorial para utilizar o app
+ *
+ *
  */
 
 public class InfoActivity extends AppIntro {
-
+    private static final int RESULT_INSTRUCTIONS = 42;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +64,7 @@ public class InfoActivity extends AppIntro {
 
 
         // Magic goes here
-        this.setResult(42);
+        this.setResult(RESULT_INSTRUCTIONS);
         finish();
     }
 
