@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/mysleep_icon"/>
+            android:src="@mipmap/ic_night"/>
     </item>
 
 </layer-list>

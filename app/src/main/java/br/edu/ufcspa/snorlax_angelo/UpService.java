@@ -60,11 +60,12 @@ public class UpService extends Service {
     }
 
 
-
-    /*
-     método que agenda uma instância da classe TimerTask
+    /**
+     * método que agenda uma instância da classe TimerTask
      para ser executada de acordo com o valor do counter em milissegundos
-                                                                           */
+     */
+
+
 
     private void startService()
     {
