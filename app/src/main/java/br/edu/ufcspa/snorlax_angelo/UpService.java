@@ -126,7 +126,7 @@ public class UpService extends Service {
             new UploadFilesAsync().execute(files);
         }
     }
-    
+
 
     public void syncRecordings(DataBaseAdapter data){
         Log.d("snorlax_service","start sync recording ");

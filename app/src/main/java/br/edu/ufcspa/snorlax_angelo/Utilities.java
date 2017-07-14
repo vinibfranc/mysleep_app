@@ -84,8 +84,13 @@ public class Utilities {
             URL url = new URL("https://google.com");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(10000);
-            connection.connect();
-            success = connection.getResponseCode() == 200;
+            try {
+                connection.connect();
+                success = connection.getResponseCode() == 200;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
