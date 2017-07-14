@@ -78,7 +78,7 @@ public class UpService extends Service {
         public void run()
         {
             Log.d("snorlax_service","running Timer task...");
-            if(isOnline()){
+            if(Utilities.isOnline()){
                 processFilesToBeUploaded();
                 DataBaseAdapter data = DataBaseAdapter.getInstance(ctx);
                 data.updateStatusRecordingOnUploadFilesFinished();
@@ -126,13 +126,7 @@ public class UpService extends Service {
             new UploadFilesAsync().execute(files);
         }
     }
-
-    public boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
+    
 
     public void syncRecordings(DataBaseAdapter data){
         Log.d("snorlax_service","start sync recording ");

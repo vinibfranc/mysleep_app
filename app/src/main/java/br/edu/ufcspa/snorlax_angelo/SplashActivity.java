@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
         userModel = SharedPreferenceManager.getSharedInstance().getUserModelFromPreferences();
 
         if(userModel!=null) {
-            if(Utilities.isOnline(getBaseContext()))
+            if(Utilities.isOnline())
                 downloadQuestion();
             else
                 goToHomeActivity(userModel);

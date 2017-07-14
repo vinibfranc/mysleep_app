@@ -12,6 +12,9 @@ import android.os.StatFs;
 import android.util.Base64;
 import android.util.Log;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -72,15 +75,21 @@ public class Utilities {
 
     /**
      * Método que verifica conexão com internet
-     * @param ct
      * @return boolean há conexão com internet
      */
 
-    public static boolean isOnline(Context ct) {
-        ConnectivityManager cm =
-                (ConnectivityManager) ct.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+    public static boolean isOnline() {
+        boolean success = false;
+        try {
+            URL url = new URL("https://google.com");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(10000);
+            connection.connect();
+            success = connection.getResponseCode() == 200;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return success;
     }
 
 
