@@ -46,6 +46,7 @@ import ufcspa.edu.br.snorlax_angelo.R;
 /**
  * Activity principal do app, Inicia Serviço @{@link UpService} , recupera o perfil do usuario @{@link UserModel} e controla as transições entre as fragments
  *
+ * Comentario do Vinicius
  */
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -322,6 +323,8 @@ public class HomeActivity extends AppCompatActivity
         }
         return false;
     }
+
+
 
 
 
