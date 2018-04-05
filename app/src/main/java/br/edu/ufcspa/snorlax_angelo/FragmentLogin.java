@@ -46,7 +46,7 @@ import br.edu.ufcspa.snorlax_angelo.managers.SharedPreferenceManager;
 import br.edu.ufcspa.snorlax_angelo.model.User;
 import br.edu.ufcspa.snorlax_angelo.model.UserModel;
 import ufcspa.edu.br.snorlax_angelo.R;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -55,10 +55,10 @@ import butterknife.OnClick;
  */
 public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignInListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "app";
-    @Bind(R.id.progress_bar) ProgressBar progressBar;
-    @Bind (R.id.login_facebook) ImageButton btFbLogin;
-    @Bind (R.id.login_google) ImageButton btGmLogin;
-    @Bind (R.id.tx_tcle_link) TextView txTcleLink;
+    @BindView(R.id.progress_bar) ProgressBar progressBar;
+    @BindView (R.id.login_facebook) ImageButton btFbLogin;
+    @BindView (R.id.login_google) ImageButton btGmLogin;
+    @BindView (R.id.tx_tcle_link) TextView txTcleLink;
 
    /* @Bind(R.id.login_layout)
     LinearLayout view;*/
@@ -86,6 +86,7 @@ public class FragmentLogin extends Fragment implements FbConnectHelper.OnFbSignI
         ButterKnife.bind(this, view);
         txTcleLink.setPaintFlags(txTcleLink.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         setup();
+        Utilities.getHash(getContext());
     }
 
     /**
